@@ -18,12 +18,11 @@ public class ejercicio2UN7 {
 Map<String, Double> PrecioProducto = new HashMap<>();
 		
 		
-		// Indicar las Key(alumnos)
+		
 		for (int i = 1; i <= cantidadProductos; i++) {
 			System.out.print("Ingrese el nombre del producto " + i + ": ");
 			String nombreProducto = scanner.next();
-//			double notaMediaPorAlumno = 0;
-			// Indicar las Value(nota)
+
 			
 		System.out.print("Ingrese precio producto: ");
 		double precioProductoBruto = scanner.nextDouble();
@@ -59,13 +58,12 @@ Map<String, Double> PrecioProducto = new HashMap<>();
 				
 				System.out.println( "El precio total de la compra sera de: "+ totalCompra);
 				
-//				System.out.print("El pago del cliente sera ");
-//				double pagoCliente =  scanner.nextDouble();
+				System.out.print("El pago del cliente sera ");
+				double pagoCliente =  scanner.nextDouble();
 //				
-//				double cambioCliente = pagoCliente - totalCompra;
-//				System.out.println("El cliente pago " + pagoCliente + " y el cambio sera de " + cambioCliente);
-//	}
-//			
+				double cambioCliente = pagoCliente - totalCompra;
+				System.out.println("El cliente pago " + pagoCliente + " y el cambio sera de " + cambioCliente);
+			
 			}
 }
 
@@ -74,21 +72,4 @@ Map<String, Double> PrecioProducto = new HashMap<>();
 		
 		
 		
-		
-//		
-//		double precioTotalBruto = carrito.getPrecioTotalBruto();
-//		double iva = precioTotalBruto * 0.21;
-//		double precioTotalConIVA = precioTotalBruto + iva;
-//
-//		// Creamos al cliente y calculamos su cambio//
-//		Cliente cliente = new Cliente("Juan", 10.0);
-//		double cambio = cliente.getCambio(precioTotalConIVA);
-//
-//		// Finalmente, mostramos la información en la factura//
-//		System.out.println("IVA aplicado (21%): " + iva);
-//		System.out.println("Precio total bruto: " + precioTotalBruto);
-//		System.out.println("Precio total con IVA: " + precioTotalConIVA);
-//		System.out.println("Número de artículos comprados: " + carrito.getNumeroArticulos());
-//		System.out.println("Cantidad pagada: " + cliente.getCantidadPagada());
-//		System.out.println("Cambio a devolver al cliente: " + cambio);
 	
