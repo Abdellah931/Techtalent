@@ -1,57 +1,46 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import java.util.Iterator;
 import java.util.Scanner;
-import java.swing.JOptionPane; 
+
 
 public class ejercicio1UN7 {
 
 	public static void main(String[] args) {
 
-		ArrayList<String> lista = new ArrayList<>();
-		lista.add("Marc");
 		
-		for (Object o : lista) {
-			System.out.println(o);
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.print("Ingrese la cantidad de alumnos: ");
+			int totalNotas = scanner.nextInt();
+
+			Map<String, Double> notasAlumnos = new HashMap<>();
+			// Indicar las Key(alumnos)
+			for (int i = 1; i <= totalNotas; i++) {
+				System.out.print("Ingrese el nombre del alumno " + i + ": ");
+				double cantidadNotas = scanner.nextDouble();
+				
+				// Indicar las Value(nota)
+				System.out.print("Ingrese la nota " + i + ": ");
+				double nota = scanner.nextDouble();
+
+				// Almacenar la nota en el HashMap
+				notasAlumnos.put(nota,cantidadNotas);
+			}
+
+			double sumaNotas = 0;
+
+			// Calcular la suma de las notas
+			for (double nota : notasAlumnos.values()) {
+				sumaNotas += nota;
+			}
+
+			double notaMedia = sumaNotas / totalNotas;
+
+			System.out.println("La nota media de los " + cantidadNotas + " alumnos es: " + notaMedia);
+
+			scanner.close();
 		}
-		System.out.println(lista.toString());
-
-		Scanner sc= new Scanner(System.in); 
-        System.out.println("Introduce nota");  
-        
-        ArrayList<Integer> listaNumeros = new ArrayList<>();
-        int numero=0;
-        for( int i=0; i<3; i++) {
-        String num = sc.nextLine(); 
-        numero =Integer.parseInt(num);
-		listaNumeros.add(numero);
-        }
-    
-		System.out.println(numero());
-        
-        sc.close();
-  
-	
-		System.out.println("Notas: " );
-		System.out.println(listaNumeros.toString());
-//		System.out.println( "Media:" listaNumeros.get());
-		
-		Iterator<Integer> it = listaNumeros.iterator();
-		int num1, sumaNumeros=0;
-		while (it.hasNext()) {
-			num1= it.next();
-			sumaNumeros+=num1;
-			
-		}
-		int mediaNumeros= sumaNumeros/listaNumeros.size();
-		System.out.println("Nota media: " + mediaNumeros);
-		
 	}
-
-	private static char[] numero() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-    }
-
