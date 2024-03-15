@@ -14,33 +14,52 @@ public class ejercicio1UN7 {
 			Scanner scanner = new Scanner(System.in);
 
 			System.out.print("Ingrese la cantidad de alumnos: ");
+			int totalAlumnos = scanner.nextInt();
+			System.out.print("Ingrese la cantidad de notas x alumno: ");
 			int totalNotas = scanner.nextInt();
 
+
 			Map<String, Double> notasAlumnos = new HashMap<>();
-			// Indicar las Key(alumnos)
-			for (int i = 1; i <= totalNotas; i++) {
-				System.out.print("Ingrese el nombre del alumno " + i + ": ");
-				double cantidadNotas = scanner.nextDouble();
+			
+			for (int i = 1; i <= totalAlumnos; i++) {
 				
-				// Indicar las Value(nota)
-				System.out.print("Ingrese la nota " + i + ": ");
+				
+				System.out.print("Ingrese el nombre del alumno " + i + ": ");
+				String nombreAlumno = scanner.next();
+			
+				
+				for (int j = 1; j <= totalNotas; j++) {
+				System.out.print("Ingrese la nota ");
 				double nota = scanner.nextDouble();
+				
+				notasAlumnos.put(nombreAlumno,nota);
 
-				// Almacenar la nota en el HashMap
-				notasAlumnos.put(nota,cantidadNotas);
+				double sumaNotas = 0;
+				for (double notas : notasAlumnos.values()) {
+					sumaNotas += notas;
+				}
+
+				double notaMedia = sumaNotas / totalNotas;
+				
+				System.out.println(notaMedia);
+				
+								}
 			}
+			
+double deu=0;
+	double fin=0;
 
-			double sumaNotas = 0;
+			for (double notas : notasAlumnos.values()) {
+				deu += notas;
+			
 
-			// Calcular la suma de las notas
-			for (double nota : notasAlumnos.values()) {
-				sumaNotas += nota;
+			 fin = deu / totalAlumnos;
+			
 			}
-
-			double notaMedia = sumaNotas / totalNotas;
-
-			System.out.println("La nota media de los " + cantidadNotas + " alumnos es: " + notaMedia);
-
+			System.out.println("La nota media de los " + totalNotas + " alumnos es: " + fin);
+		
 			scanner.close();
-		}
+			
+			}
 	}
+	
