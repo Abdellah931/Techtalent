@@ -21,11 +21,7 @@ public class ejercicio3UND7 {
 			stockProducto.put("pera" , 7);
 			
 
-//			System.out.println("Escriba la cantidad de Articulos que quiere añadir ");
-//			int cantidadCesta =  sc.nextInt();
-//			idea antigua
-			
-			
+
 			
 			Scanner sc = new Scanner(System.in);
 			
