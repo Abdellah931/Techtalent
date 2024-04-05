@@ -1,5 +1,3 @@
-
-
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +86,7 @@ public class StockArticulos {
     
     public static StockArticulos buscarArticulo(String nombre) {
         for (StockArticulos producto : inventario) {
-            if (producto.nombre.equalsIgnoreCase(nombre)) {
+            if (producto.nombre.contains(nombre)) {
                 return producto;
             }
         }
@@ -216,6 +214,9 @@ public class StockArticulos {
                 case "5":
                     continuar = false; // Salir del bucle
                     break;
+                case "6":
+                String F = JOptionPane.showInputDialog(null, "ingresa", "keta", JOptionPane.QUESTION_MESSAGE);
+                buscarArticulo(F);                    break;
                 default:
                     JOptionPane.showMessageDialog(null,
                     		"Opción no válida", "Error", JOptionPane.ERROR_MESSAGE);
@@ -234,7 +235,7 @@ public class StockArticulos {
 
  // Va pidiendo los artículos conforme pasan por caja
     public static void comprarArticulos(Scanner sc, HashMap<String, Double[]> compra) {
-        double totalDeArticulos = 0;
+        // double totalDeArticulos = 0;
         do {
             System.out.println("Ingrese el nombre del artículo:");
             String nombreProductoComprado = sc.nextLine();
@@ -256,7 +257,7 @@ public class StockArticulos {
                 // Agregar el artículo a la compra
                 double precioConIVA = calcularPrecioConIVA(articulo.precioBruto, articulo.IVA);
                 compra.put(nombreProductoComprado, new Double[]{articulo.precioBruto, precioConIVA, articulo.IVA, (double) cantidad});
-                totalDeArticulos++;
+                // totalDeArticulos++;
                 // Restar la cantidad comprada del inventario
                 articulo.cantidad -= cantidad;
             } else {
@@ -291,16 +292,35 @@ public class StockArticulos {
                 break;
         }
     }
+//  Te da el tiquet de la compra
+    public static void imprimirResumenCompra(HashMap<String, Double[]> compra) {
+        System.out.println("-- RESUMEN DE LA COMPRA --");
+        for (String nombreProducto : compra.keySet()) {
+            Double[] detalles = compra.get(nombreProducto);
 
-        
+            double precioBruto = detalles[0];
+            double precioNeto = detalles[1];
+            double iva = detalles[2];
+            System.out.println("Producto: " + nombreProducto +
+                    "\nPrecio Bruto: " + precioBruto + "€ / Precio Neto: " + precioNeto +
+                    "€ / IVA: " + iva + "%");
+        }
+    }
     
 //  Devuelve por consola Total Bruto y Total Neto
     public static void imprimirTotalesCompra(double totalCompraBruto, double totalCompraNeto) {
         System.out.println("Total de la compra (Bruto): " + totalCompraBruto +
                 "\nTotal de la compra (Neto): " + totalCompraNeto);
     }
-
-
+//	Método para mostrar opciones del inventario
+    public static void mostrarOpcionesInventario() {
+        System.out.println("\nOpciones del inventario:"
+                + "\n1. Agregar artículo"
+                + "\n2. Eliminar artículo"
+                + "\n3. Modificar cantidad"
+                + "\n4. Mostrar stock"
+                + "\n5. Salir");
+    }
     
 //  Calcula el precio neto a partir del bruto y su IVA
     public static double calcularPrecioConIVA(double precio, double iva) {

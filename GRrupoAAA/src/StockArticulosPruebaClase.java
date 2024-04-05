@@ -230,8 +230,7 @@ public class Ejercicio04 {
         });
     }
 
-    public static void panelCrearTicket(ArrayList<String> arrayProductos, HashMap<String, Integer> productoStock,
-            HashMap<String, Double> productoPrecio, DecimalFormat dosDecimales) {
+    public static void panelCrearTicket(ArrayList<String> arrayProductos, HashMap<String, Double[]> compra, DecimalFormat dosDecimales) {
         StringBuilder texto = new StringBuilder("PRECIO DE LOS ARTICULOS\n");
         String producto = "";
         int cantidad = 0;
@@ -254,19 +253,19 @@ public class Ejercicio04 {
             JTextField cantidadTxt = new JTextField(10);
             infoArticulos.add(cantidadTxt);
 
-            infoArticulos.add(new JLabel("¿Último artículos?"));
-            JCheckBox masArticulosCheck = new JCheckBox();
-            infoArticulos.add(masArticulosCheck);
+            // infoArticulos.add(new JLabel("¿Último artículos?"));
+            // JCheckBox masArticulosCheck = new JCheckBox();
+            // infoArticulos.add(masArticulosCheck);
 
-            infoArticulos.add(new JLabel("¿Artículo esencial?"));
-            JCheckBox articuloEsencialCheck = new JCheckBox();
-            infoArticulos.add(articuloEsencialCheck);
+            // infoArticulos.add(new JLabel("¿Artículo esencial?"));
+            // JCheckBox articuloEsencialCheck = new JCheckBox();
+            // infoArticulos.add(articuloEsencialCheck);
 
             do {
                 confirmado = JOptionPane.showConfirmDialog(null, infoArticulos, "Titulo", JOptionPane.OK_CANCEL_OPTION);
 
-                masArticulos = masArticulosCheck.isSelected() ? true : false;
-                articuloEsencial = articuloEsencialCheck.isSelected() ? true : false;
+                // masArticulos = masArticulosCheck.isSelected() ? true : false;
+                // articuloEsencial = articuloEsencialCheck.isSelected() ? true : false;
 
                 producto = policiaProducto(seleccionable, producto);
                 if (producto.equals("- Seleccionar producto -")) {
@@ -277,11 +276,34 @@ public class Ejercicio04 {
                         error = true;
                     } else {
                         int stockProducto = productoStock.get(producto);
-                        stockFinal = revisorCantidades(productoStock, stockProducto, stockFinal, cantidad, producto);
+                        // stockFinal = revisorCantidades(productoStock, stockProducto, stockFinal, cantidad, producto);
                         if (stockFinal == 0) {
                             error = true;
                         } else {
                             error = false;
+
+                            StockArticulosPrueba producto = new StockArticulosPrueba(nombre, precioBruto, IVA, cantidad);
+                            inventario.add(producto);
+                 
+
+                            double precioConIVA = calcularPrecioConIVA(, articulo.IVA);
+                            compra.put(producto, new Double[]{articulo.precioBruto, precioConIVA, articulo.IVA, (double) cantidad});
+
+                            totalProducto = precioIVA * cantidad;
+                            String ivaFormateado = dosDecimales.format(totalProducto);
+                            String totalFormateado = dosDecimales.format(totalProducto);
+                            texto.append("Producto: '" + producto + "'\n    Precio/unidad: <" + ivaFormateado
+                                    + "> / <" + cantidad + ">\n    Precio total: <" + totalFormateado + ">\n\n");
+
+                            totalCompra += totalProducto;
+
+                                if (arrayProductos.size() < 2) {
+                                    masArticulos = false;
+                                    JOptionPane.showMessageDialog(null, "No hay mas artículos para poder comprar, finalice la compra", "Artículos máximos", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                                }
+
+                            arrayProductos.remove(producto);
                         }
                     }
                 }
@@ -292,26 +314,6 @@ public class Ejercicio04 {
             }
 
             // objeto.reStock(articulo, nuevoStock) (crear el metodo)
-            productoStock.put(producto, stockFinal);
-
-            precioIVA = precioArticuloConIva(productoPrecio, precioIVA, articuloEsencial, producto);
-
-            totalProducto = precioIVA * cantidad;
-            String ivaFormateado = dosDecimales.format(totalProducto);
-            String totalFormateado = dosDecimales.format(totalProducto);
-            texto.append("Producto: '" + producto + "'\n    Precio/unidad: <" + ivaFormateado
-                    + "> / <" + cantidad + ">\n    Precio total: <" + totalFormateado + ">\n\n");
-
-            totalCompra += totalProducto;
-
-            if (arrayProductos.size() < 2) {
-                masArticulos = false;
-                JOptionPane.showMessageDialog(null, "No hay mas artículos para poder comprar, finalice la compra",
-                        "Artículos máximos", JOptionPane.INFORMATION_MESSAGE);
-                break;
-            }
-
-            arrayProductos.remove(producto);
         } while (!masArticulos);
         
         ticket(dosDecimales, texto, totalCompra);
@@ -374,22 +376,16 @@ public class Ejercicio04 {
         }
     }
 
-    public static double precioArticuloConIva(HashMap<String, Double> productoPrecio, double precioIVA,
-            boolean articuloEsencial, String producto) {
-        double precio = 0.0;
-        for (String productoLista : productoPrecio.keySet()) {
-            if (productoLista.toLowerCase().equals(producto.toLowerCase())) {
-                precio = productoPrecio.get(productoLista);
-            }
-        }
-
-        if (articuloEsencial) {
-            precioIVA = precio * (1.04);
-            return precioIVA;
-        } else {
-            precioIVA = precio * (1.21);
-            return precioIVA;
-        }
+   //  Calcula el precio neto a partir del bruto y su IVA
+   public static double calcularPrecioConIVA(double precio, double iva) {
+    return precio * iva;
+        // if (articuloEsencial) {
+        //     precioIVA = precio * (1.04);
+        //     return precioIVA;
+        // } else {
+        //     precioIVA = precio * (1.21);
+        //     return precioIVA;
+        // }
     }
 
     public static void actualizarProductos(JFrame frame, HashMap<String, Integer> productoStock,
