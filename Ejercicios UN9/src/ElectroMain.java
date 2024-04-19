@@ -12,7 +12,7 @@ public class ElectroMain {
         System.out.println(electrodomestico2);
         System.out.println("Precio final: " + electrodomestico2.precioFinal() + " €");
 
-        Electrodomesticos1 electrodomestico3 = new Electrodomesticos1(200, 8, "azul", 'A');
+        Electrodomesticos1 electrodomestico3 = new Electrodomesticos1(200, 50, 'A', "AZUL");
         System.out.println("\nElectrodomestico 3:");
         System.out.println(electrodomestico3);
         System.out.println("Precio final: " + electrodomestico3.precioFinal() + " €");
