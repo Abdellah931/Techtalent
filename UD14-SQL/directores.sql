@@ -1,5 +1,9 @@
 use directores;
 
+create TABLE despachos (
+    numero int AUTO_INCREMENT,
+    capacidad int not null,
+    primary key (numero));
 
 create table directores (
     dni VARCHAR(8),

@@ -18,4 +18,3 @@ CREATE TABLE muestra (
     velmin SMALLINT UNSIGNED,
     velmax SMALLINT UNSIGNED,
     KEY (idestacion), FOREIGN KEY (idestacion) REFERENCES estacion (id) ON DELETE NO ACTION ON UPDATE CASCADE);
-    
