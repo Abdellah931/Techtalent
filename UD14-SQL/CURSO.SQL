@@ -30,17 +30,18 @@ CREATE TABLE curso (
 
 
 create table alumnos(
+    DNI varchar(8)NOT NULL,
     nombre varchar(12)NOT NULL,
     apellido1 varchar(12)NOT NULL,
     apellido2 varchar(12),
-    DNI varchar(8)NOT NULL,
     direccion varchar(100),
     sexo char,
     fecha_nacimiento datetime,
-    curso varchar(2) NOT NULL,
-    primary key (nombre,DNI),
-    FOREIGN key (curso)
-    REFERENCES cursos (cod_curso)
+    curs varchar(2) NOT NULL,
+    primary key (DNI),
+    UNIQUE (nombre),
+    FOREIGN key (curs)
+    REFERENCES curso (cod_curso)
     on DELETE CASCADE
     on UPDATE CASCADE
 );

@@ -1,16 +1,29 @@
 use PyProveedores;
 
+CREATE TABLE piezas (
+    idpiez INT AUTO_INCREMENT ,
+    nombre VARCHAR (100) NOT NULL,
+    PRIMARY KEY(idpiez));
 
-create table suministros(
-    codigo int AUTO_INCREMENT,
-    id char(4),
-    precio int,
-    primary key(codigo,id),
-    FOREIGN key (codigo)
-    REFERENCES piezas(codigo)
-    on DELETE CASCADE
-    on UPDATE CASCADE,
-    FOREIGN key (id)
-    REFERENCES proveedores(id)
-    on DELETE CASCADE
-    on UPDATE CASCADE);
+CREATE TABLE proveedores (
+    idprov INT AUTO_INCREMENT ,
+    nombre VARCHAR (100) NOT NULL,
+    PRIMARY KEY(idprov));
+
+
+CREATE TABLE suministra (
+    idpiez INT,
+    idprov INT,
+    precio FLOAT NOT NULL,
+    PRIMARY KEY(idpiez,idprov),
+    FOREIGN KEY (idpiez) 
+    REFERENCES piezas (idpiez) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+    FOREIGN KEY (idprov) 
+    REFERENCES proveedores (idprov) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE);
+
+    insert into piezas values
+    

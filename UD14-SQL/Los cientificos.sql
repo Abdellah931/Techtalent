@@ -1,7 +1,7 @@
 use loscientificos;
 create table cientificos (
     DNI VARCHAR(8),
-    nomApels NVARCHAR(255),
+    nomApels VARCHAR(255),
     primary key (DNI)
 );
 
@@ -25,3 +25,4 @@ CREATE TABLE asignado (
     on DELETE CASCADE
     on UPDATE CASCADE
 );
+
