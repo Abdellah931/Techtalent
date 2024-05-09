@@ -43,8 +43,8 @@ public class Calculadora2 extends JFrame {
 		panel.add(textOP2);
 
 //      BOTON CALCULAR
-		JButton botonAñadir = new JButton("Calcular");
-		botonAñadir.setBounds(125, 110, 150, 25);
+		JButton botonAñadir = new JButton("=");
+		botonAñadir.setBounds(90, 330, 130, 60);
 		panel.add(botonAñadir);
 
 		// Agregar ActionListener a CALCULAR
@@ -54,19 +54,19 @@ public class Calculadora2 extends JFrame {
 		
 		// Botones de operadores
 		JButton buttonDiv = new JButton("/");
-		buttonDiv.setBounds(250, 20, 50, 30);
+		buttonDiv.setBounds(230, 330, 60,60);
 		panel.add(buttonDiv);
 
 		JButton buttonProd = new JButton("*");
-		buttonProd.setBounds(310, 20, 50, 30);
+		buttonProd.setBounds(230, 260, 60,60);
 		panel.add(buttonProd);
 
 		JButton buttonResta = new JButton("-");
-		buttonResta.setBounds(250, 55, 50, 30);
+		buttonResta.setBounds(230, 190, 60,60);
 		panel.add(buttonResta);
 
 		JButton buttonSuma = new JButton("+");
-		buttonSuma.setBounds(310, 55, 50, 30);
+		buttonSuma.setBounds(230, 120, 60,60);
 		panel.add(buttonSuma);
 
 		// Botones de números
