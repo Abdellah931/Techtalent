@@ -25,26 +25,21 @@ public class Calculadora2 extends JFrame {
 		add(panel);
 
 //      OPERANDO 1
-		JLabel etiquetaop1 = new JLabel("Operando 1:");
-		etiquetaop1.setBounds(10, 20, 200, 20);
+		JLabel etiquetaop1 = new JLabel();
+		etiquetaop1.setBounds(10, 20, 200, 80);
 		panel.add(etiquetaop1);
 
 		JTextField textOP1 = new JTextField(20);
-		textOP1.setBounds(100, 20, 100, 25); // Posicionamos el campo de texto
+		textOP1.setBounds(20, 50, 270,45); // Posicionamos el campo de texto
 		panel.add(textOP1);
 
 //      OPERANDO 2
-		JLabel etiquetaop2 = new JLabel("Operando 2:");
-		etiquetaop2.setBounds(10, 50, 200, 20);
-		panel.add(etiquetaop2);
 
-		JTextField textOP2 = new JTextField(20);
-		textOP2.setBounds(100, 50, 100, 25);
-		panel.add(textOP2);
+	
 
 //      BOTON CALCULAR
 		JButton botonAñadir = new JButton("=");
-		botonAñadir.setBounds(90, 330, 130, 60);
+		botonAñadir.setBounds(90, 330, 60, 60);
 		panel.add(botonAñadir);
 
 		// Agregar ActionListener a CALCULAR
@@ -53,6 +48,10 @@ public class Calculadora2 extends JFrame {
 		// Importa la clase JButton si aún no lo has hecho
 		
 		// Botones de operadores
+		JButton buttonComa = new JButton(",");
+		buttonComa.setBounds(160, 330, 60,60);
+		panel.add(buttonComa);
+		
 		JButton buttonDiv = new JButton("/");
 		buttonDiv.setBounds(230, 330, 60,60);
 		panel.add(buttonDiv);
@@ -81,6 +80,13 @@ public class Calculadora2 extends JFrame {
 		    JButton button = new JButton(Integer.toString(i));
 		    button.setBounds(xActual, yActual, 60, 60);
 		    panel.add(button);
+		    
+		    button.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String valorBoton = ((JButton) e.getSource()).getText(); // Obtener el texto del botón
+	                textField.setText(textField.getText() + valorBoton); // Agregar el texto del botón al JTextField
+	            }
+	        });
 		    
 		    // Actualiza las coordenadas para el próximo botón
 		    xActual += espacioHorizontal;
@@ -121,6 +127,9 @@ public class Calculadora2 extends JFrame {
 							
 						}else if(buttonDiv.isSelected()) {
 							resultado = op1 / op2;
+							
+//						}else if(buttonComa.isSelected()) {
+//							resultado = op1  op2;
 						}
 						
 						
