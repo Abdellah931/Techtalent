@@ -1,11 +1,15 @@
 package calculadora;
-import javax.swing.JOptionPane;
-
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.*;
-import javax.swing.JButton;
+
+
+
 public class Calculadora2 extends JFrame {
 
 	private JTextField textField;
@@ -20,28 +24,33 @@ public class Calculadora2 extends JFrame {
 //      CREAR PANEL
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		Font font = new Font("Arial", Font.BOLD, 14);
-		panel.setFont(font);
 		add(panel);
 
-//      OPERANDO 1
-		JLabel etiquetaop1 = new JLabel();
-		etiquetaop1.setBounds(10, 20, 200, 80);
-		panel.add(etiquetaop1);
-
-		JTextField textOP1 = new JTextField(20);
-		textOP1.setBounds(20, 50, 270,45); // Posicionamos el campo de texto
-		panel.add(textOP1);
-
-//      OPERANDO 2
-
-	
+		// Crear JTextField
+		textField = new JTextField("");
+		textField.setBounds(43, 20, 300, 20);
+		panel.add(textField);
 
 //      BOTON CALCULAR
 		JButton botonAñadir = new JButton("=");
 		botonAñadir.setBounds(90, 330, 60, 60);
 		panel.add(botonAñadir);
 
+		
+		botonAñadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String expresion = textField.getText(); // Obtener la expresión del JTextField
+				ScriptEngineManager manager = new ScriptEngineManager();
+				ScriptEngine engine = manager.getEngineByName("JavaScript");
+				try {
+					Object resultado = engine.eval(expresion); // Evaluar la expresión
+					textField.setText(resultado.toString()); // Mostrar el resultado en el JTextField
+				} catch (ScriptException ex) {
+					// Manejar cualquier excepción al evaluar la expresión
+					ex.printStackTrace();
+				}
+			}
+		});
 		// Agregar ActionListener a CALCULAR
 	
 //		BOTONES OPERACIONES
@@ -52,22 +61,52 @@ public class Calculadora2 extends JFrame {
 		buttonComa.setBounds(160, 330, 60,60);
 		panel.add(buttonComa);
 		
+		buttonComa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + ".");
+			}
+		});
+		
 		JButton buttonDiv = new JButton("/");
 		buttonDiv.setBounds(230, 330, 60,60);
 		panel.add(buttonDiv);
+		
+		buttonDiv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + "/");
+			}
+		});
 
 		JButton buttonProd = new JButton("*");
 		buttonProd.setBounds(230, 260, 60,60);
 		panel.add(buttonProd);
+		
+		buttonProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + "*");
+			}
+		});
 
 		JButton buttonResta = new JButton("-");
 		buttonResta.setBounds(230, 190, 60,60);
 		panel.add(buttonResta);
+		
+		buttonResta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + "-");
+			}
+		});
 
 		JButton buttonSuma = new JButton("+");
 		buttonSuma.setBounds(230, 120, 60,60);
 		panel.add(buttonSuma);
 
+		buttonSuma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + "+");
+			}
+		});
+		
 		// Botones de números
 		int xInicial = 20; // Posición inicial en x
 		int yInicial = 120; // Posición inicial en y
@@ -80,6 +119,20 @@ public class Calculadora2 extends JFrame {
 		    JButton button = new JButton(Integer.toString(i));
 		    button.setBounds(xActual, yActual, 60, 60);
 		    panel.add(button);
+		    
+//		    if(botonAñadir.isSelected()) {
+//				;
+//				
+//			}else if(buttonResta.isSelected()) {
+//				resultado = op1 - op2;
+//				
+//			}else if(Prod.isSelected()) {
+//				resultado = op1 * op2;
+//				
+//			}else if(toggleDiv.isSelected()) {
+//				resultado = op1 / op2;
+//			}
+			
 		    
 		    button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
@@ -100,49 +153,14 @@ public class Calculadora2 extends JFrame {
 		JButton button0 = new JButton("0");
 		button0.setBounds(xInicial, yActual, 60, 60);
 		panel.add(button0);
+		
+		
 
-		// Agregar ActionListener a CALCULAR
-				botonAñadir.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e)
-					{
-						
-						String textoOP1 = textOP1.getText();
-						String textoOP2 = textOP2.getText();
-						
-						double op1 = Double.parseDouble(textoOP1);
-						
-						double op2 = Double.parseDouble(textoOP2);
-						
-						double resultado =0;
-						
-						
-						if(buttonSuma.isSelected()) {
-							resultado = op1 + op2;
-							
-						}else if(buttonResta.isSelected()) {
-							resultado = op1 - op2;
-							
-						}else if(buttonProd.isSelected()) {
-							resultado = op1 * op2;
-							
-						}else if(buttonDiv.isSelected()) {
-							resultado = op1 / op2;
-							
-//						}else if(buttonComa.isSelected()) {
-//							resultado = op1  op2;
-						}
-						
-						
-						JOptionPane.showMessageDialog(Calculadora2.this, "El resultado es: " + resultado);
-					}
-				});
-
-	}
-
-	public static void main(String[] args) {
-		// Crear una instancia de la ventana
-		Calculadora2 ventana = new Calculadora2();
-		// Hacer visible la ventana
-		ventana.setVisible(true);
+		// Agregar ActionListener al botón de cero
+		button0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(textField.getText() + "0");
+			}
+		});
 	}
 }
