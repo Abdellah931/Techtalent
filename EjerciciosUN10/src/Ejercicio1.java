@@ -26,10 +26,7 @@ public class Ejercicio1 {
                 int intento = scanner.nextInt();
                 this.intentos++;
                 
-                int a = 10;
-                int b = 0;
-                
-                int resultado = a/b;
+      
 
                 if (intento < 1 || intento > 500) {
                     System.out.println("El número debe estar entre 1 y 500.");
@@ -49,9 +46,7 @@ public class Ejercicio1 {
                 System.out.println("Entrada inválida. Debes ingresar un número.");
                 scanner.next(); // Limpiar el buffer del scanner
                 this.intentos++;
-            } catch (ArithmeticException e) {
-    			System.out.println("No puedes dividir por cero");
-    		}
+            } 
         }
 
         scanner.close();
