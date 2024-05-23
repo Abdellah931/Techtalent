@@ -12,6 +12,7 @@ public class ejercicio9Grupal extends JFrame {
     private JButton secondButton = null;
     private Color firstColor;
     private Color secondColor;
+    private boolean isComparing = false; // Variable para controlar el estado de comparación
 
     public ejercicio9Grupal() {
         // Configuración de la ventana
@@ -22,7 +23,7 @@ public class ejercicio9Grupal extends JFrame {
         setLayout(new GridLayout(4, 4)); // 4x4 GridLayout
 
         // Inicializar colores de los botones
-        Color[] colorArray = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, 
+        Color[] colorArray = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
                               Color.ORANGE, Color.CYAN, Color.MAGENTA, Color.PINK};
 
         for (Color color : colorArray) {
@@ -43,6 +44,11 @@ public class ejercicio9Grupal extends JFrame {
     private class ButtonClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (isComparing) {
+                // Si ya se están comparando dos botones, no permitir más clics
+                return;
+            }
+
             JButton clickedButton = (JButton) e.getSource();
             int index = -1;
             for (int i = 0; i < buttons.length; i++) {
@@ -61,25 +67,19 @@ public class ejercicio9Grupal extends JFrame {
                 } else {
                     secondButton = clickedButton;
                     secondColor = colors.get(index);
+                    isComparing = true; // Indicar que estamos en estado de comparación
 
                     if (firstColor.equals(secondColor)) {
                         firstButton.setEnabled(false);
                         secondButton.setEnabled(false);
-                        firstButton = null;
-                        secondButton = null;
+                        resetSelection();
                     } else {
                         Timer timer = new Timer(500, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                try {
-                                    firstButton.setBackground(Color.GRAY);
-                                    secondButton.setBackground(Color.GRAY);
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                } finally {
-                                    firstButton = null;
-                                    secondButton = null;
-                                }
+                                firstButton.setBackground(Color.GRAY);
+                                secondButton.setBackground(Color.GRAY);
+                                resetSelection();
                             }
                         });
                         timer.setRepeats(false);
@@ -87,6 +87,12 @@ public class ejercicio9Grupal extends JFrame {
                     }
                 }
             }
+        }
+
+        private void resetSelection() {
+            firstButton = null;
+            secondButton = null;
+            isComparing = false;
         }
     }
 
