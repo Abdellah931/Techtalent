@@ -1,0 +1,25 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #fff8cc; /* Cambia el color de fondo del cuerpo */
+    padding: 20px; /* Añade un poco de espacio alrededor del contenido */
+  }
+  .highlight {
+    font-size: 2em; /* Aumenta el tamaño de la fuente */
+    font-weight: bold; /* Hace el texto en negrita */
+    background-color: yellow;
+    margin-bottom: 20px;
+    padding: 10px; /* Añade un poco de espacio interno */
+  }
+  .sub-highlight {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: blue;
+    font-style: italic;
+  }
+  .space-below {
+    margin-bottom: 20px; 
+  }
+  .blue-text {
+    color: blue; /* Color azul para el texto */
+  }

@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    width: 900px;
+    margin: 0 auto; /* Centra el contenido en la ventana */
+    background-color: white; /* Fondo blanco para el contenido */
+    padding: 20px;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+  }
+  
+  nav ul {
+    background-color: #333;
+    overflow: hidden;
+    color: white;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    list-style: none;
+    width: 150px; /* Ancho del menú */
+    float: left; /* Alineación a la izquierda */
+  }
+  
+  nav ul li {
+    padding: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  nav ul li a:hover {
+    background-color: #575757;
+  }
+  
+  .main-content {
+    margin-left: 170px; /* Deja espacio para el menú a la izquierda */
+  }
+  
+  main {
+    padding: 1em;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    clear: both; /* Limpia los flotantes */
+  }
+  
+  .green-text {
+    color: #4CAF50; /* Verde para "Parque Natural" */
+  }
+  
+  .yellow-text {
+    color: #FFEB3B; /* Amarillo para "Bicuerca" */
+  }
+  
+  .especie {
+    margin-bottom: 20px;
+  }
+  
+  .especie h3 {
+    color: #4CAF50; /* Verde para el título de las especies */
+  }
+  
